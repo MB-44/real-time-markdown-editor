@@ -27,11 +27,6 @@ window.onload = function () {
 
     // convertTextAreaToMarkdown();
 
-    sharejs.open(document.location.pathname, 'text', function(error, doc){
-        doc.attach_textarea(pad);
-        convertTextAreaToMarkdown();
-    });
-
     // ignore if on home page
     if (document.location.pathname.length > 1) {
         // implement share js

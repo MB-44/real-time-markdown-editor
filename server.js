@@ -12,7 +12,6 @@ app.use(express.static(__dirname + '/public'));
 app.get('/', function(req, res){
     res.render('pad');
 });
-
 app.get('/(:id)',function(req, res) {
     res.render('pad');
 });
@@ -28,7 +27,6 @@ var options = {
 
 // attaching the express server to sharejs
 sharejs.server.attach(app, options);
-
 
 // listen on port 8000 - localhost 
 var port = process.env.PORT || 8000;
