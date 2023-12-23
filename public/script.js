@@ -27,9 +27,24 @@ window.onload = function () {
 
     // convertTextAreaToMarkdown();
 
-    sharejs.open('home', 'text', function(error, doc){
+    sharejs.open(document.location.pathname, 'text', function(error, doc){
         doc.attach_textarea(pad);
         convertTextAreaToMarkdown();
     });
-    
+
+    // ignore if on home page
+    if (document.location.pathname.length > 1) {
+        // implement share js
+        var documentName = document.location.pathname.substring(1);
+        sharejs.open(documentName, 'text', function(error, doc) {
+            doc.attach_textarea(pad);
+            convertTextAreaToMarkdown();
+        });
+    }
+    convertTextAreaToMarkdown();
+
+
+
+
+
 }
