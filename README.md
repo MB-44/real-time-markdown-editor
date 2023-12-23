@@ -1,1 +1,1 @@
-# real-time-markdown-editor
+# RealTime Markdown Viewer using shareJS
