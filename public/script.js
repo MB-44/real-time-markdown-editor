@@ -3,6 +3,31 @@ window.onload = function () {
     var pad = document.getElementById('pad');
     var mardownArea = document.getElementById('markdown');
 
+    // make the tab act like a tab
+    pad.addEventListener('keydown',function(e) {
+        if(e.keyCode == 9) {
+            // tab was preseed
+            // ..get postion/ selection
+            var start = this.selectionStart;
+            var end = this.selectionEnd;
+
+            var target = e.target;
+            var value = e.value;
+
+            // ..set text area value to: text before caret + tab + text after caret
+            target.value = value.substring(0, start) + "\t" + value.substring(end);
+
+            // ..put caret at r8 position again (add one for tab)
+            this.selectionStart = this.selectionEnd = start + 1;
+            
+            // .. prevent the focus lose
+            e.preventDefault();
+        }
+    });
+
+    var previousMarkdownValue;
+
+    // convert text area to markdown html
     var convertTextAreaToMarkdown = function() {
         var markdownText = pad.value;
         previousMarkdownValue = markdownText;
@@ -17,12 +42,14 @@ window.onload = function () {
         return false;
     };
 
+    // check every 1s if the text area has changed
     setInterval(function(){
         if (didChangeOccur()) {
             convertTextAreaToMarkdown();
         }
     }, 1000);
 
+    // convert text area on input change
     pad.addEventListener('input',convertTextAreaToMarkdown);
 
     // convertTextAreaToMarkdown();
@@ -36,10 +63,8 @@ window.onload = function () {
             convertTextAreaToMarkdown();
         });
     }
+
+    // convert on page load
     convertTextAreaToMarkdown();
 
-
-
-
-
-}
+};
